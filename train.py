@@ -6,9 +6,9 @@ import numpy as np
 
 import tensorflow as tf
 
+# Load the required submodules
 from official.nlp import bert
 from official.nlp import optimization
-
 import official.nlp.bert.tokenization
 import official.nlp.bert.configs
 import official.nlp.bert.bert_models
@@ -17,6 +17,7 @@ import official.nlp.bert.bert_models
 checkpoint_dir = "uncased_L-12_H-768_A-12"
 
 
+# Set up tokenizer to generate Tensorflow dataset
 tokenizer = bert.tokenization.FullTokenizer(
     vocab_file=os.path.join(checkpoint_dir, "vocab.txt"),
     do_lower_case=True)
@@ -83,5 +84,5 @@ my_examples = bert_encode(["I hate this movie", "Do not watch this. It's bad.", 
 results = bert_classifier(my_examples, training=False)
 for res in results: print(np.argmax(res), res.numpy())
 
-dataset = "twitter"
-tf.saved_model.save(bert_classifier, export_dir=f"trained_models/{dataset}")
+dataset_name = "imdb"
+tf.saved_model.save(bert_classifier, export_dir=f"trained_models/{dataset_name}")

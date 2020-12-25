@@ -1,2 +1,1 @@
-tensorflow==2.4.0
 tf-models-official==2.3.0
